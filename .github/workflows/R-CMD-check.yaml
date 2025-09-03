@@ -39,7 +39,10 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
-
+      - name: Install X11 dependencies on macOS
+        if: runner.os == 'macOS'
+        run: |
+          brew install --cask xquartz
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
@@ -50,7 +53,4 @@ jobs:
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
 
-- name: Install X11 dependencies on macOS
-  if: runner.os == 'macOS'
-  run: |
-    brew install --cask xquartz
+
