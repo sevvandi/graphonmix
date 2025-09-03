@@ -4,12 +4,12 @@
 \name{graphonmix-package}
 \alias{graphonmix}
 \alias{graphonmix-package}
-\title{graphonmix: What the Package Does (Title Case)}
+\title{graphonmix: Generates Mixture Graphs from Dense and Sparse Graphons}
 \description{
-More about what it does (maybe more than one line). Continuation lines should be indented.
+Generates (U,W) mixture graphs where U is a line graph graphon and W is a dense graphon. Graphons are graph limits and graphon U can be written as sequence of positive numbers adding to 1. Graphs are sampled from U and W and joined randomly to obtain the mixture graph. Given a mixture graph, U can be inferred.
 }
 \author{
-\strong{Maintainer}: Jane Doe \email{jane@example.com}
+\strong{Maintainer}: Sevvandi Kandanaarachchi \email{sevvandik@gmail.com} (\href{https://orcid.org/0000-0002-0337-0395}{ORCID})
 
 }
 \keyword{internal}

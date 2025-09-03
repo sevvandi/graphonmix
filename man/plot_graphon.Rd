@@ -18,7 +18,7 @@ A ggplot object.
 Plots graphon
 }
 \examples{
-W <- create_exp_matrix(100, 100, 100)
+W <- create_exp_matrix(100, 100)
 plot_graphon(W)
 
 }

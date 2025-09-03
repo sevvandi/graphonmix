@@ -18,10 +18,12 @@ arrange_matrix <- function(mat){
 #' @return A ggplot object.
 #'
 #' @examples
-#' W <- create_exp_matrix(100, 100, 100)
+#' W <- create_exp_matrix(100, 100)
 #' plot_graphon(W)
 #'
+#' @export
 plot_graphon <- function(W, cols=c("white","black")){
+  column <- val <- NULL
   adj1 <- W
   df1 <- data.frame(val = c(matrix(adj1)),
                     row = rep(rep(1:dim(adj1)[1], each = dim(adj1)[1]), len = length(adj1)),
@@ -53,6 +55,7 @@ plot_graphon <- function(W, cols=c("white","black")){
 #' @examples
 #' W <- create_exp_matrix(100, 100)
 #'
+#' @export
 create_exp_matrix <- function(nrow, scalar) {
   # Initialize an empty matrix of the desired dimensions
   result <- matrix(0, nrow = nrow, ncol = nrow)

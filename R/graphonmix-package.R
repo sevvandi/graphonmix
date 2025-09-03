@@ -1,5 +1,7 @@
 #' @importFrom ggplot2 ggplot aes geom_raster xlab ylab geom_point geom_line scale_y_reverse
 #' @importFrom ggplot2 autoplot scale_fill_gradientn theme theme_bw element_blank
+#' @importFrom stats coef lm median predict
+#' @importFrom igraph %du% ecount degree vcount
 #' @export
 ggplot2::autoplot
 NULL

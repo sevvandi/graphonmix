@@ -15,6 +15,8 @@
 #'
 #' @export
 autoplot.extract_sparse <- function(object, ...){
+  x <- y <- segment <- NULL
+
   # Extract data and num_hubs
   df <- object$data
   i <- object$cutoff
