@@ -21,3 +21,8 @@ Imports:
     igraph,
     imager,
     stats
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+URL: https://sevvandi.github.io/graphonmix/
