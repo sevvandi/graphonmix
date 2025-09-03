@@ -49,3 +49,8 @@ jobs:
         with:
           upload-snapshots: true
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
+
+- name: Install X11 dependencies on macOS
+  if: runner.os == 'macOS'
+  run: |
+    brew install --cask xquartz
