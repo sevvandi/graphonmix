@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>graphonmix • graphonmix</title>
+<title>Introduction • graphonmix</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="graphonmix">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -49,7 +49,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>graphonmix</h1>
+      <h1>Introduction</h1>
             
       
 
@@ -59,8 +59,231 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sevvandi.github.io/graphonmix/">graphonmix</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/" class="external-link">igraph</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'igraph'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     decompose, spectrum</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     union</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sevvandi.github.io/graphonmix/">graphonmix</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="uw-mixture-graphs">(U,W)-mixture graphs<a class="anchor" aria-label="anchor" href="#uw-mixture-graphs"></a>
+</h2>
+<p>The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>W</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(U,W)</annotation></semantics></math>-mixture
+graphs are graphs generated from two graphons
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>.
+Graphon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>
+generates dense graphs and graphon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>
+generates sparse graphs. The vignette <em>Line graphs and graphons</em>
+explains how graphon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>
+generates sparse graphs. Onece the dense and sparse graphs are
+generated, nodes are joined randomly. This gives the mixture graph.</p>
+<!-- As a consequence of the Aldous-Hoover theorem graphons produce dense graphs (to be technically correct, dense or empty graphs). So how do we generate sparse graphs? This is the question. We deal with this with a graphon $U$, which produces disjoint cliques. Disjoint cliques are dense graphs. So how do we make sparse graphs? The trick is to take inverse line graphs of these disjoint cliques. Line graphs map edges to vertices and line graphs of stars are complete graphs.   -->
+<div class="section level3">
+<h3 id="the-two-graphons-w-and-u">The two graphons W and U<a class="anchor" aria-label="anchor" href="#the-two-graphons-w-and-u"></a>
+</h3>
+<p>Let’s plot the two graphons
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>
+first.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create the dense graphon W(x,y) = exp(-(x+y)/40) where x and y ranges from 1 to 100</span></span>
+<span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_exp_matrix.html">create_exp_matrix</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">40</span><span class="op">)</span></span>
+<span><span class="co"># plot this graphon</span></span>
+<span><span class="fu"><a href="../reference/plot_graphon.html">plot_graphon</a></span><span class="op">(</span><span class="va">W</span><span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_fixed</a></span><span class="op">(</span>ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dense graphon W"</span><span class="op">)</span>  </span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p>The graphon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>
+above generates the dense part of the graph. The graphon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>,
+which we show below generates the sparse part of the graph.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># weights for the sparse part</span></span>
+<span><span class="va">seq</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">:</span><span class="fl">5</span></span>
+<span><span class="va">wts</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">1.2</span><span class="op">^</span><span class="va">seq</span><span class="op">)</span> </span>
+<span><span class="va">wts</span> <span class="op">&lt;-</span> <span class="va">wts</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">wts</span><span class="op">)</span></span>
+<span><span class="va">wts</span></span>
+<span><span class="co">#&gt; [1] 0.3219076 0.2682563 0.2235469 0.1862891</span></span>
+<span></span>
+<span><span class="va">U</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/line_graphon.html">line_graphon</a></span><span class="op">(</span><span class="va">wts</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_graphon.html">plot_graphon</a></span><span class="op">(</span><span class="va">U</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_fixed</a></span><span class="op">(</span>ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Line graphon U"</span><span class="op">)</span>  </span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+</div>
+<div class="section level3">
+<h3 id="generating-the-mixture-graph-in-one-step">Generating the mixture graph in one step<a class="anchor" aria-label="anchor" href="#generating-the-mixture-graph-in-one-step"></a>
+</h3>
+<p>Graphon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>
+is generated from weights <em>wts</em> in the above piece of code. Given
+<em>wts</em> and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>
+we can generate a mixture graph using the function
+<em>sample_mixed_graph</em>. We need to specify the number of nodes in
+the dense part <em>nd</em> and the number of nodes in the sparse part
+<em>ns</em>. The parameter <em>p</em> gives the proportion of the number
+of edges added in the joining process. The joining process adds
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>×</mo></mrow><annotation encoding="application/x-tex">p \times</annotation></semantics></math><em>number of edges in dense part</em> to the graph. These edges connect
+nodes in the dense part to those in the sparse part randomly.</p>
+<!-- Let's sample a mixture graph from a dense graphon $W$ and a disjoint clique graphon $U$, which acts as the sparse graphon. We call the sampled graph from $W$ as the dense part and the sampled graph from $U$ (equivalently from the sequence called a mass partition) the sparse part.  -->
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># single function to generate a graph mixture</span></span>
+<span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sample_mixed_graph.html">sample_mixed_graph</a></span><span class="op">(</span><span class="va">W</span>, <span class="va">wts</span>, nd <span class="op">=</span> <span class="fl">100</span>, ns <span class="op">=</span> <span class="fl">300</span>, p <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="co"># plot(gr1, vertex.label = NA, vertex.size = 1, main = "(U,W) Graph mixture")</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gr1</span>,</span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>     vertex.size <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">gr1</span><span class="op">)</span><span class="op">*</span><span class="fl">0.1</span>,</span>
+<span>     edge.color <span class="op">=</span> <span class="st">"lightgray"</span>,     <span class="co"># Light colored edges</span></span>
+<span>     vertex.label <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>     vertex.color <span class="op">=</span> <span class="st">"lightblue"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"(U,W) Graph mixture"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+</div>
+<div class="section level3">
+<h3 id="generating-a-dense-and-sparse-graph-and-joining-to-get-the-mixture">Generating a dense and sparse graph and joining to get the
+mixture<a class="anchor" aria-label="anchor" href="#generating-a-dense-and-sparse-graph-and-joining-to-get-the-mixture"></a>
+</h3>
+<p>Or we can generate the dense part and sparse part separately and join
+them.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sample dense part and plot it</span></span>
+<span><span class="va">grdense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sample_graphon.html">sample_graphon</a></span><span class="op">(</span><span class="va">W</span>, n <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">grdense</span>,</span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>     vertex.size <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">grdense</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.1</span>,</span>
+<span>     edge.color <span class="op">=</span> <span class="st">"lightgray"</span>,     <span class="co"># Light colored edges</span></span>
+<span>     vertex.label <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>     vertex.color <span class="op">=</span> <span class="st">"lightblue"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Dense Part"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># sample sparse part and plot it</span></span>
+<span><span class="va">grsparse</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/generate_star_union.html">generate_star_union</a></span><span class="op">(</span><span class="va">wts</span>, n <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">grsparse</span>,</span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>     vertex.size <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">grsparse</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.1</span>,</span>
+<span>     edge.color <span class="op">=</span> <span class="st">"lightgray"</span>,     <span class="co"># Light colored edges</span></span>
+<span>     vertex.label <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>     vertex.color <span class="op">=</span> <span class="st">"lightblue"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Sparse Part"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># join the two graphs and plot it</span></span>
+<span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/graph_join.html">graph_join</a></span><span class="op">(</span><span class="va">grdense</span>, <span class="va">grsparse</span>, p <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gr2</span>,</span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>     vertex.size <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">gr2</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.1</span>,</span>
+<span>     edge.color <span class="op">=</span> <span class="st">"lightgray"</span>,     <span class="co"># Light colored edges</span></span>
+<span>     vertex.label <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>     vertex.color <span class="op">=</span> <span class="st">"lightblue"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"(U,W) Graph mixture"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-5-3.png" width="700"></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="estimating-graphon-u">Estimating graphon U<a class="anchor" aria-label="anchor" href="#estimating-graphon-u"></a>
+</h2>
+<p>If the graph sequence is sparse, then the high degrees of the graph
+are generated by graphon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>.
+These are different from the low degrees. We can see it when we plot the
+sorted log degrees of the observed graph.</p>
+<div class="section level3">
+<h3 id="observing-the-elbow-point-in-unique-log-degrees">Observing the elbow point in unique log degrees<a class="anchor" aria-label="anchor" href="#observing-the-elbow-point-in-unique-log-degrees"></a>
+</h3>
+<p>The graph below plots the sorted unique log degrees of the mixture
+graph. Notice the elbow point around indices 4 and 5.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">degu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">gr2</span><span class="op">)</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># we only take the top 1/2 of the unique degree values here to see the effect of the hub nodes clearly</span></span>
+<span><span class="va">degu</span> <span class="op">&lt;-</span> <span class="va">degu</span><span class="op">[</span><span class="va">degu</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">degu</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  index <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">degu</span><span class="op">)</span>,</span>
+<span>  log_degree <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">degu</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">index</span>, <span class="va">log_degree</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Index"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Log Degree"</span><span class="op">)</span>  </span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>Let us check the degrees of the dense part and the sparse part and
+compare it with the degrees of the mixture graph</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">deg_dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">grdense</span><span class="op">)</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">deg_dense</span></span>
+<span><span class="co">#&gt;  [1] 41 39 36 31 30 29 28 26 25 24 21 19 18 17 16 15 14 13 12 11 10  9  8  7  6</span></span>
+<span><span class="co">#&gt; [26]  5  4  3  2  1  0</span></span>
+<span></span>
+<span><span class="va">deg_sparse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">grsparse</span><span class="op">)</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">deg_sparse</span></span>
+<span><span class="co">#&gt; [1] 96 80 67 55  1</span></span>
+<span></span>
+<span><span class="va">deg_mix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">gr2</span><span class="op">)</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">deg_mix</span></span>
+<span><span class="co">#&gt;  [1] 97 82 71 56 42 40 36 33 32 31 30 29 28 26 25 24 22 20 19 18 17 16 15 14 13</span></span>
+<span><span class="co">#&gt; [26] 12 11 10  9  8  7  6  5  4  3  2  1</span></span></code></pre></div>
+<p>Of course the graph joining process increases the degrees of some
+nodes because nodes are joined by the additional edges. See how only a
+small number of nodes in the sparse part have degrees greater than that
+of the dense part.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">deg_sparse</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">deg_dense</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1 2 3 4</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="detecting-the-elbow-point-and-estimating-u">Detecting the elbow point and estimating
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math><a class="anchor" aria-label="anchor" href="#detecting-the-elbow-point-and-estimating-u"></a>
+</h3>
+<p>From the mixture graph we can identify the sparse part. We do this by
+finding the elbow point of the log degree graph shown above. The
+function <em>extract_sparse</em> does the job.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/extract_sparse.html">extract_sparse</a></span><span class="op">(</span><span class="va">gr2</span><span class="op">)</span></span>
+<span><span class="va">out</span><span class="op">$</span><span class="va">num_hubs</span></span>
+<span><span class="co">#&gt; [1] 4</span></span>
+<span></span>
+<span><span class="co"># Estimate of the mass-partition</span></span>
+<span><span class="va">out</span><span class="op">$</span><span class="va">phat</span></span>
+<span><span class="co">#&gt; [1] 0.3169935 0.2679739 0.2320261 0.1830065</span></span>
+<span></span>
+<span><span class="co"># Actual mass partition</span></span>
+<span><span class="va">wts</span></span>
+<span><span class="co">#&gt; [1] 0.3219076 0.2682563 0.2235469 0.1862891</span></span></code></pre></div>
+<p>The estimated mass-partition is given in <em>out$phat</em> in the
+above code. The estimate is close to the actual mass partition given by
+<em>wts</em>.</p>
+<p>We can see the elbow point of the unique log degree graph with
+<em>autoplot</em>.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

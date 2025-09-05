@@ -50,7 +50,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of graphonmix is to …</p>
+<p>The goal of graphonmix is to generate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>W</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(U,W)</annotation></semantics></math>-mixture graphs. These graphs are generated from a standard dense graphon <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math> and a disjoint clique graphons <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>, which acts as the sparse graphon.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -62,10 +62,72 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>This is a basic example on how to sample a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>W</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(U,W)</annotation></semantics></math>-mixture graph.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sevvandi.github.io/graphonmix/">graphonmix</a></span><span class="op">)</span></span>
-<span><span class="co">## basic example code</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/" class="external-link">igraph</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'igraph'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     decompose, spectrum</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     union</span></span>
+<span><span class="co"># create the dense graphon W(x,y) = 0.1</span></span>
+<span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">0.1</span>, nrow <span class="op">=</span> <span class="fl">100</span>, ncol <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="co"># create the sparse part - a disjoint set of stars</span></span>
+<span><span class="va">wts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="co"># single function to generate a graph mixture</span></span>
+<span><span class="va">gr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sample_mixed_graph.html">sample_mixed_graph</a></span><span class="op">(</span><span class="va">W</span>, <span class="va">wts</span>, nd <span class="op">=</span> <span class="fl">100</span>, ns <span class="op">=</span> <span class="fl">300</span>, p <span class="op">=</span> <span class="fl">0.5</span>, option <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gr1</span>,</span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>     vertex.size <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">gr1</span><span class="op">)</span><span class="op">*</span><span class="fl">0.1</span>,</span>
+<span>     edge.color <span class="op">=</span> <span class="st">"lightgray"</span>,     <span class="co"># Light colored edges</span></span>
+<span>     vertex.label <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>     vertex.color <span class="op">=</span> <span class="st">"lightblue"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"(U,W) Graph mixture"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-1.png" width="100%"></p>
+<p>Or you can generate the two graphs separately and join them.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sample the dense part and plot</span></span>
+<span><span class="va">grdense</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sample_graphon.html">sample_graphon</a></span><span class="op">(</span><span class="va">W</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">grdense</span>,</span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>     vertex.size <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">grdense</span><span class="op">)</span><span class="op">*</span><span class="fl">0.1</span>,</span>
+<span>     edge.color <span class="op">=</span> <span class="st">"lightgray"</span>,     <span class="co"># Light colored edges</span></span>
+<span>     vertex.label <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>     vertex.color <span class="op">=</span> <span class="st">"lightblue"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Dense Part"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># sample the sparse part and plot</span></span>
+<span><span class="va">grsparse</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generate_star_union.html">generate_star_union</a></span><span class="op">(</span><span class="va">wts</span>, <span class="fl">300</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">grsparse</span>,</span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>     vertex.size <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">grsparse</span><span class="op">)</span><span class="op">*</span><span class="fl">0.1</span>,</span>
+<span>     edge.color <span class="op">=</span> <span class="st">"lightgray"</span>,     <span class="co"># Light colored edges</span></span>
+<span>     vertex.label <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>     vertex.color <span class="op">=</span> <span class="st">"lightblue"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Sparse Part"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-2-2.png" width="100%"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># join the two graphs and plot</span></span>
+<span><span class="va">gr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/graph_join.html">graph_join</a></span><span class="op">(</span><span class="va">grdense</span>, <span class="va">grsparse</span>, option <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gr2</span>,</span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>     vertex.size <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">gr2</span><span class="op">)</span><span class="op">*</span><span class="fl">0.1</span>,</span>
+<span>     edge.color <span class="op">=</span> <span class="st">"lightgray"</span>,     <span class="co"># Light colored edges</span></span>
+<span>     vertex.label <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>     vertex.color <span class="op">=</span> <span class="st">"lightblue"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"(U,W) Graph mixture"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-2-3.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

@@ -41,7 +41,7 @@ corresponding to a line graph graphon U.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_mixed_graph</span><span class="op">(</span><span class="va">W</span>, <span class="va">wts</span>, <span class="va">nd</span>, <span class="va">ns</span>, <span class="va">p</span>, <span class="va">option</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sample_mixed_graph</span><span class="op">(</span><span class="va">W</span>, <span class="va">wts</span>, <span class="va">nd</span>, <span class="va">ns</span>, p <span class="op">=</span> <span class="fl">0.5</span>, option <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -90,17 +90,17 @@ number of edges specified by <code>p</code>.</p></dd>
 <span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span></span>
 <span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">sample_mixed_graph</span><span class="op">(</span><span class="va">W</span>, <span class="va">wts</span>, <span class="va">nd</span>, <span class="va">ns</span>, <span class="va">p</span>, option <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gr</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4a73489 U--- 300 936 -- Star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 9a1e2fc U--- 300 996 -- Star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name_1 (g/c), name_2 (g/c), mode_1 (g/c), mode_2 (g/c),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | center_1 (g/n), center_2 (g/n), name (g/c), mode (g/c), center (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4a73489:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1--  5 1-- 16 1-- 28 1-- 38 1-- 39 1-- 42 1-- 64 1-- 69 1-- 70 1-- 81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] 1-- 97 1--100 1--246 2--  8 2-- 31 2-- 33 2-- 65 2-- 66 2-- 74 2--114</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] 2--144 2--147 2--256 3-- 30 3-- 66 3-- 72 3-- 78 3-- 85 3--100 3--212</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 4--  7 4-- 11 4-- 16 4-- 17 4-- 21 4-- 28 4-- 34 4-- 51 4-- 56 4-- 76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 4-- 81 4-- 89 4-- 93 5-- 15 5-- 50 5-- 67 5-- 70 5-- 73 5-- 79 5-- 81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 5-- 87 5-- 97 6-- 15 6-- 16 6-- 31 6-- 47 6-- 52 6-- 55 6-- 56 6-- 68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 6-- 77 6-- 88 6-- 91 6-- 98 6--194 6--238 6--270 7--  9 7-- 10 7-- 11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 9a1e2fc:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 12 1-- 16 1-- 18 1-- 28 1-- 38 1-- 54 1-- 58 1-- 63 1-- 64 1-- 65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] 1-- 86 2--  6 2--  8 2-- 23 2-- 34 2-- 45 2-- 47 2-- 55 2-- 65 2-- 68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] 2-- 71 2-- 86 2-- 96 3--  6 3-- 18 3-- 28 3-- 36 3-- 40 3-- 57 3-- 59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] 3-- 71 3-- 74 3-- 79 3-- 84 3-- 87 3-- 94 3--177 4-- 20 4-- 45 4-- 49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [41] 4-- 55 4-- 57 4-- 59 4-- 60 4-- 67 4-- 77 4-- 82 4-- 90 4-- 91 4-- 98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [51] 4-- 99 4--247 4--298 5--  8 5-- 21 5-- 27 5-- 48 5-- 49 5-- 68 5-- 80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [61] 5-- 82 5-- 90 5-- 95 5--212 6-- 14 6-- 16 6-- 23 6-- 31 6-- 36 6-- 38</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 </code></pre></div>
     </div>
