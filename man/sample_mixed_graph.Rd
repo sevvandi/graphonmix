@@ -4,7 +4,7 @@
 \alias{sample_mixed_graph}
 \title{Generate a (U,W) mixture graph}
 \usage{
-sample_mixed_graph(W, wts, nd, ns, p, option)
+sample_mixed_graph(W, wts, nd, ns, p = 0.5, option = 2)
 }
 \arguments{
 \item{W}{The dense graphon. This is a symmetric matrix with values in [0,1]}

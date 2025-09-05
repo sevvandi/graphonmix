@@ -16,7 +16,11 @@
 #' @export
 generate_star_union <- function(wts, n){
   # wts is the mass partition
-  stopifnot("Weights should add up to 1" = sum(wts) == 1)
+  # stopifnot("Weights should add up to 1" = sum(wts) == 1)
+  if(sum(wts) != 1){
+    wts <- wts/sum(wts)
+    message("Rescaling weights to add to 1")
+  }
   n = as.integer(n)
 
   star_sizes <- ceiling(n*wts)
@@ -32,9 +36,27 @@ generate_star_union <- function(wts, n){
 }
 
 
-
-graph_join <- function(gr1, gr2, p = 0.5, opt = 2) {
-  # p is the proportion of nodes in the smaller graph to be joined
+#' Joins two graphs
+#'
+#' Joins two graphs randomly connecting vertices
+#'
+#' @param gr1 The first graph to join
+#' @param gr2 The second graph to join
+#' @param p The proportion of edges in \code{gr1} to be added as part of the joining
+#' @param  option Two options. 1 does the disjoint union, 2 does the random edges union.
+#'
+#' @return The joined graph
+#'
+#' @examples
+#' W <- create_exp_matrix(100, 100)
+#' # create the sparse part - a disjoint set of stars
+#' wts <- c(0.5, 0.3, 0.2)
+#' grdense <- sample_graphon(W, 100)
+#' grsparse <- generate_star_union(wts, 200)
+#' gr <- graph_join(grdense, grsparse, opt = 2)
+#'
+#'@export
+graph_join <- function(gr1, gr2, p = 0.5, option = 2) {
   # Check that inputs are igraph objects
   if (!igraph::is.igraph(gr1) || !igraph::is.igraph(gr2)) {
     stop("Both inputs must be igraph objects")
@@ -47,8 +69,7 @@ graph_join <- function(gr1, gr2, p = 0.5, opt = 2) {
   # Create a disjoint union of the two graphs
   joined_graph <- igraph::disjoint_union(gr1, gr2)
 
-  minn <- min(n1, n2)*p
-  if(opt == 2){
+  if(option == 2){
     # The other option - not the disjoint union
     edgecount <- ceiling(ecount(gr1)*p)
     node1_sample <- sample(1:(n1+n2), edgecount, replace = TRUE)
@@ -96,19 +117,23 @@ graph_join <- function(gr1, gr2, p = 0.5, opt = 2) {
 #' gr <- sample_mixed_graph(W, wts, nd, ns, p, option = 2)
 #' gr
 #' @export
-sample_mixed_graph <- function(W, wts, nd, ns, p, option){
+sample_mixed_graph <- function(W, wts, nd, ns, p = 0.5, option = 2){
   # W is a graphon
   stopifnot("W is not a matrix " = is.matrix(W))
   stopifnot("W is not symmetric " = isSymmetric(W))
-  stopifnot("wts need to add to 1 " = sum(wts) == 1)
+ #  stopifnot("wts need to add to 1 " = sum(wts) == 1)
   stopifnot("p needs to be between 0 and 1 " = (p >=0) & (p <= 1))
   stopifnot("Option needs to be either 1 or 2 " = option %in% c(1,2))
 
+  if(sum(wts) != 1){
+    wts <- wts/sum(wts)
+    message("Rescaling weights to add to 1")
+  }
   nd <- as.integer(nd)
   ns <- as.integer(ns)
   grdense <- sample_graphon(W, nd)
   grsparse <- generate_star_union(wts, ns)
-  gr <- graph_join(grdense, grsparse, p=p,  opt = option)
+  gr <- graph_join(grdense, grsparse, p=p,  option = option)
   gr
 }
 
@@ -197,4 +222,59 @@ scale_graphon <- function(W, n){
   img <- imager::as.cimg(W)
   Wscaled <- as.matrix(imager::resize(img, n, n, interpolation_type = 2))
   Wscaled
+}
+
+
+#' Creates a line graphon from a sequence of probabilities
+#'
+#' Creates a line graphon, which is a disjoint clique graphon from a
+#' sequence of probability values
+#'
+#' @param probs The list of probabilities starting from the largest.
+#'
+#' @return The line graphon
+#'
+#' @examples
+#' library(ggplot2)
+#' wts <- c(0.5, 0.3, 0.2)
+#' U <- line_graphon(wts)
+#' plot_graphon(U)
+#'
+#' @export
+line_graphon <- function(probs){
+  # Generates a line graphon from a list of probabilities
+
+  if(sum(probs) == 1){
+    minp <- min(probs)
+    nn <- 3*length(probs)/minp
+    len <- length(probs)
+    st <- 1
+    mat <- matrix(0, nrow = nn, ncol = nn)
+    for(kk in 1:len){
+      if(st < nn){
+        prob_len <- round(probs[kk]*nn)
+        en <- min(st + prob_len-1, nn)
+        mat[st:en, st:en] <- 1
+        st <- st + prob_len
+      }
+    }
+  }else{
+    # sum probs < 1
+    minp <- min(probs)
+    zeroprob <- 1 - sum(probs)
+    probs <- c(probs, zeroprob)
+    nn <- 3*length(probs)/minp
+    len <- length(probs)
+    st <- 1
+    mat <- matrix(0, nrow = nn, ncol = nn)
+    for(kk in 1:(len-1)){
+      if(st < nn){
+        prob_len <- round(probs[kk]*nn)
+        en <- min(st + prob_len -1, nn)
+        mat[st:en, st:en] <- 1
+        st <- st + prob_len
+      }
+    }
+  }
+  mat
 }

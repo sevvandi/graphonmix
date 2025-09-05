@@ -8,6 +8,13 @@
 \description{
 Generates (U,W) mixture graphs where U is a line graph graphon and W is a dense graphon. Graphons are graph limits and graphon U can be written as sequence of positive numbers adding to 1. Graphs are sampled from U and W and joined randomly to obtain the mixture graph. Given a mixture graph, U can be inferred.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://sevvandi.github.io/graphonmix/}
+}
+
+}
 \author{
 \strong{Maintainer}: Sevvandi Kandanaarachchi \email{sevvandik@gmail.com} (\href{https://orcid.org/0000-0002-0337-0395}{ORCID})
 
