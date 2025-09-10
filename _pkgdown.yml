@@ -1,4 +1,15 @@
 url: https://sevvandi.github.io/graphonmix/
 template:
   bootstrap: 5
+navbar:
+  structure:
+    left: [articles, reference, tutorials, news]
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: Getting Started
+        href: articles/graphonmix.html
+      - text: Sparse Graphs from Line Graphons
+        href: articles/linegraphons.html
 

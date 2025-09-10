@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# graphonmix
+# graphonmix <a href="https://sevvandi.github.io/graphonmix/"><img src="man/figures/logo.png" align="right" height="138" alt="graphonmix website" /></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/sevvandi/graphonmix/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sevvandi/graphonmix/actions/workflows/R-CMD-check.yaml)
@@ -9,7 +9,8 @@
 
 The goal of graphonmix is to generate $(U,W)$-mixture graphs. These
 graphs are generated from a standard dense graphon $W$ and a disjoint
-clique graphons $U$, which acts as the sparse graphon.
+clique graphons $U$, which acts as the sparse graphon. More details can
+be found at (Kandanaarachchi and Ong 2025).
 
 ## Installation
 
@@ -102,3 +103,22 @@ plot(gr2,
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-3.png" width="100%" />
+
+## Acknowledgements
+
+A big thank you to Sashenka Fernando for helping me with the hex
+sticker.
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+
+<div id="ref-SKCS2025graphon" class="csl-entry">
+
+Kandanaarachchi, Sevvandi, and Cheng Soon Ong. 2025. “Graphon Mixtures.”
+*arXiv Preprint arXiv:2505.13864*.
+
+</div>
+
+</div>

@@ -6,7 +6,9 @@
 \alias{graphonmix-package}
 \title{graphonmix: Generates Mixture Graphs from Dense and Sparse Graphons}
 \description{
-Generates (U,W) mixture graphs where U is a line graph graphon and W is a dense graphon. Graphons are graph limits and graphon U can be written as sequence of positive numbers adding to 1. Graphs are sampled from U and W and joined randomly to obtain the mixture graph. Given a mixture graph, U can be inferred.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+Generates (U,W) mixture graphs where U is a line graph graphon and W is a dense graphon. Graphons are graph limits and graphon U can be written as sequence of positive numbers adding to 1. Graphs are sampled from U and W and joined randomly to obtain the mixture graph. Given a mixture graph, U can be inferred. Kandanaarachchi and Ong (2025) \doi{10.48550/arXiv.2505.13864}.
 }
 \seealso{
 Useful links:

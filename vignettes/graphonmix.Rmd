@@ -2,9 +2,10 @@
 title: "Introduction"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{graphonmix}
+  %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: bibliography.bib
 ---
 
 ```{r, include = FALSE}
@@ -14,6 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 ```{r setup}
 library(igraph)
 library(graphonmix)
@@ -21,7 +23,7 @@ library(ggplot2)
 ```
 
 # (U,W)-mixture graphs
-The $(U,W)$-mixture graphs are graphs generated from two graphons $U$ and $W$. Graphon $W$ generates dense graphs and graphon $U$ generates sparse graphs. The vignette *Line graphs and graphons* explains how graphon $U$ generates sparse graphs. Onece the dense and sparse graphs are generated, nodes are joined randomly. This gives the mixture graph. 
+The $(U,W)$-mixture graphs are graphs generated from two graphons $U$ and $W$. Graphon $W$ generates dense graphs and graphon $U$ generates sparse graphs. The vignette *Line graphs and graphons* explains how graphon $U$ generates sparse graphs. Once the dense and sparse graphs are generated, nodes are joined randomly. This gives the mixture graph. The methodology is explained in [@SKCS2025graphon].
 
 <!-- As a consequence of the Aldous-Hoover theorem graphons produce dense graphs (to be technically correct, dense or empty graphs). So how do we generate sparse graphs? This is the question. We deal with this with a graphon $U$, which produces disjoint cliques. Disjoint cliques are dense graphs. So how do we make sparse graphs? The trick is to take inverse line graphs of these disjoint cliques. Line graphs map edges to vertices and line graphs of stars are complete graphs.   -->
 
@@ -185,3 +187,15 @@ We can see the elbow point of the unique log degree graph with *autoplot*.
 autoplot(out)
 ```
 
+Now that we have estimated the weights  (mass-partition) we can plot the estimated graphon $\hat{U}$.
+
+```{r}
+Uhat <- line_graphon(out$phat)
+plot_graphon(Uhat) + 
+  coord_fixed(ratio = 1) +
+ ggtitle("Estimate of U")  
+
+```
+
+
+## References

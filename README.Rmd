@@ -1,5 +1,6 @@
 ---
 output: github_document
+bibliography: vignettes/bibliography.bib
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -13,13 +14,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# graphonmix
+# graphonmix <a href="https://sevvandi.github.io/graphonmix/"><img src="man/figures/logo.png" align="right" height="138" alt="graphonmix website" /></a>
 
  <!-- badges: start -->
   [![R-CMD-check](https://github.com/sevvandi/graphonmix/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sevvandi/graphonmix/actions/workflows/R-CMD-check.yaml)
   <!-- badges: end -->
 
-The goal of graphonmix is to generate $(U,W)$-mixture graphs. These graphs are generated from a standard dense graphon $W$ and a disjoint clique graphons $U$, which acts as the sparse graphon. 
+The goal of graphonmix is to generate $(U,W)$-mixture graphs. These graphs are generated from a standard dense graphon $W$ and a disjoint clique graphons $U$, which acts as the sparse graphon. More details can be found at [@SKCS2025graphon].
 
 ## Installation
 
@@ -90,3 +91,8 @@ plot(gr2,
 )
 ```
 
+
+## Acknowledgements
+A big thank you to Sashenka Fernando for helping me with the hex sticker. 
+
+## References
