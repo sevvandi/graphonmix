@@ -23,6 +23,7 @@ library(ggplot2)
 ```
 
 # (U,W)-mixture graphs
+
 The $(U,W)$-mixture graphs are graphs generated from two graphons $U$ and $W$. Graphon $W$ generates dense graphs and graphon $U$ generates sparse graphs. The vignette *Line graphs and graphons* explains how graphon $U$ generates sparse graphs. Once the dense and sparse graphs are generated, nodes are joined randomly. This gives the mixture graph. The methodology is explained in [@SKCS2025graphon].
 
 <!-- As a consequence of the Aldous-Hoover theorem graphons produce dense graphs (to be technically correct, dense or empty graphs). So how do we generate sparse graphs? This is the question. We deal with this with a graphon $U$, which produces disjoint cliques. Disjoint cliques are dense graphs. So how do we make sparse graphs? The trick is to take inverse line graphs of these disjoint cliques. Line graphs map edges to vertices and line graphs of stars are complete graphs.   -->
