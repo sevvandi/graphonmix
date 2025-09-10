@@ -6,6 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Introduction • graphonmix</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -20,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">graphonmix</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +34,13 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item"><a class="nav-link" href="../articles/graphonmix.html">Get started</a></li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/graphonmix.html">Getting Started</a></li>
+    <li><a class="dropdown-item" href="../articles/linegraphons.html">Sparse Graphs from Line Graphons</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -48,8 +59,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Introduction</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Introduction</h1>
             
       
 
@@ -86,8 +96,10 @@ generates dense graphs and graphon
 generates sparse graphs. The vignette <em>Line graphs and graphons</em>
 explains how graphon
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>
-generates sparse graphs. Onece the dense and sparse graphs are
-generated, nodes are joined randomly. This gives the mixture graph.</p>
+generates sparse graphs. Once the dense and sparse graphs are generated,
+nodes are joined randomly. This gives the mixture graph. The methodology
+is explained in <span class="citation">(Kandanaarachchi and Ong
+2025)</span>.</p>
 <!-- As a consequence of the Aldous-Hoover theorem graphons produce dense graphs (to be technically correct, dense or empty graphs). So how do we generate sparse graphs? This is the question. We deal with this with a graphon $U$, which produces disjoint cliques. Disjoint cliques are dense graphs. So how do we make sparse graphs? The trick is to take inverse line graphs of these disjoint cliques. Line graphs map edges to vertices and line graphs of stars are complete graphs.   -->
 <div class="section level3">
 <h3 id="the-two-graphons-w-and-u">The two graphons W and U<a class="anchor" aria-label="anchor" href="#the-two-graphons-w-and-u"></a>
@@ -280,6 +292,25 @@ above code. The estimate is close to the actual mass partition given by
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span></code></pre></div>
 <p><img src="graphonmix_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p>Now that we have estimated the weights (mass-partition) we can plot
+the estimated graphon
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>U</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{U}</annotation></semantics></math>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Uhat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/line_graphon.html">line_graphon</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">phat</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_graphon.html">plot_graphon</a></span><span class="op">(</span><span class="va">Uhat</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_fixed</a></span><span class="op">(</span>ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Estimate of U"</span><span class="op">)</span>  </span></code></pre></div>
+<p><img src="graphonmix_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+</div>
+<div class="section level3">
+<h3 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-SKCS2025graphon" class="csl-entry">
+Kandanaarachchi, Sevvandi, and Cheng Soon Ong. 2025. <span>“Graphon
+Mixtures.”</span> <em>arXiv Preprint arXiv:2505.13864</em>.
+</div>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
