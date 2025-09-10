@@ -9,7 +9,7 @@
 
 The goal of graphonmix is to generate $(U,W)$-mixture graphs. These
 graphs are generated from a standard dense graphon $W$ and a disjoint
-clique graphons $U$, which acts as the sparse graphon. More details can
+clique graphon $U$, which acts as the sparse graphon. More details can
 be found at (Kandanaarachchi and Ong 2025).
 
 ## Installation

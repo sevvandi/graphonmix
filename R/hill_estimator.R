@@ -14,7 +14,6 @@
 #' hill_estimator(gr)
 #'
 #'
-#' @export
 hill_estimator <- function(gr, min_deg = 2){
   sorted_degs <-  sort(igraph::degree(gr))
   unique_degs <- unique(sorted_degs)
