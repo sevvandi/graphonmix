@@ -26,20 +26,19 @@ plot_graphon <- function(W, cols=c("white","black")){
   column <- val <- NULL
   adj1 <- W
   df1 <- data.frame(val = c(matrix(adj1)),
-                    row = rep(rep(1:dim(adj1)[1], each = dim(adj1)[1]), len = length(adj1)),
-                    column = rep(1:dim(adj1)[1], len = length(adj1))
-  )
+                    row = rep(rep(1:dim(adj1)[1],each = dim(adj1)[1]),
+                              len = length(adj1)),
+                    column = rep(1:dim(adj1)[1], len = length(adj1)))
   g2 <- ggplot(df1, aes(x = row, y = column, fill = val)) +
-    geom_raster() +
-    scale_fill_gradientn(colours=cols) +
-    theme(legend.position = "none",
-          axis.title.x=element_blank(),
-          axis.text.x=element_blank(),
-          axis.ticks.x=element_blank(),
-          axis.title.y=element_blank(),
-          axis.text.y=element_blank(),
-          axis.ticks.y=element_blank()) +
-    scale_y_reverse()
+    ggplot2::geom_raster() +
+    ggplot2::scale_y_reverse() +
+    ggplot2::geom_rect(xmin = min(df1$row)-0.5 , xmax = max(df1$row)+0.5 ,
+              ymin = -1*max(df1$column)-0.5 , ymax = -1*min(df1$column)+0.5 ,
+              fill = NA, color = "black", size = 0.5, inherit.aes = FALSE) +
+    ggplot2::scale_fill_gradientn(colours = cols) +
+    ggplot2::theme_void() +
+    ggplot2::theme(legend.position = "none")
+
   g2
 }
 
@@ -69,3 +68,6 @@ create_exp_matrix <- function(nrow, scalar) {
 
   return(result)
 }
+
+
+

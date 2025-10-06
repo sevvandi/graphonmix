@@ -33,10 +33,10 @@ g1 <- add_edges(g1,c(4,5))
 
 lg1 <- make_line_graph(g1)
 
-par(mfrow = c(1,2))
+oldpar <- par(mfrow = c(1,2))
 plot(g1, vertex.label = NA, edge.label = c(1,2,3,4), main = "Graph G")
 plot(lg1, vertex.label = c(1,2,3,4), vertex.size = 20, main = "Line graph L(G)")
-
+par(oldpar)
 ```
 
 ## Line graphs of star graphs
@@ -47,10 +47,10 @@ The key is that line graphs of stars are complete graphs. In the example below e
 st <- make_star(10, mode = "undirected")
 lgr_st <- make_line_graph(st)
 
-par(mfrow = c(1,2))
+oldpar <- par(mfrow = c(1,2))
 plot(st, vertex.label = NA, main = "Star graph G")
 plot(lgr_st, vertex.label = NA,  main = "Line graph L(G) of a star")
-
+par(oldpar)
 ```
 
 # Sparse graphs
