@@ -11,7 +11,7 @@ Description: Generates (U,W) mixture graphs where U is a line graph graphon and 
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Imports: 
     ggplot2,
     igraph,
