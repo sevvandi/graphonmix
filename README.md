@@ -7,10 +7,14 @@
 [![R-CMD-check](https://github.com/sevvandi/graphonmix/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sevvandi/graphonmix/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of graphonmix is to generate $(U,W)$-mixture graphs. These
-graphs are generated from a standard dense graphon $W$ and a disjoint
-clique graphon $U$, which acts as the sparse graphon. More details can
-be found at (Kandanaarachchi and Ong 2025).
+The goal of graphonmix is to generate dense or sparse graphs via
+different techniques. We explore $(U,W)$-mixture graphs and graphettes.
+$(U,W)$-mixture graphs are generated from a standard dense graphon $W$
+and a disjoint clique graphon $U$, which acts as the sparse graph
+generator. Graphettes are a triple consisting of a graphon $W$, a
+sparsifing sequence $\{\rho_n\}_n$ with $\rho_n \to 0$ and graph edit
+function $f$. $(U,W)$-mixture graphs are discussed in (Kandanaarachchi
+and Ong 2026) and graphettes are discussed in (Wijesinghe et al. 2026).
 
 ## Installation
 
@@ -22,7 +26,7 @@ You can install the development version of graphonmix from
 pak::pak("sevvandi/graphonmix")
 ```
 
-## Example
+## $(U,W)$ Mixture Example
 
 This is a basic example on how to sample a $(U,W)$-mixture graph.
 
@@ -104,6 +108,24 @@ plot(gr2,
 
 <img src="man/figures/README-unnamed-chunk-2-3.png" width="100%" />
 
+## Graphette example
+
+This is an example with $\rho_n = 10/n$ and $f = \text{star_f1}$. The
+graph edit function $\text{star_f1}$ adds stars using a Poisson process.
+
+``` r
+rho <- function(n) 20/n
+gr <- sample_graphette(W, 
+                       rho_n = rho, 
+                       graph_edit_f = 'star_f1',
+                       n = 200,
+                       t_or_p = 2)
+
+plot(gr, vertex.label = NA, vertex.size = 3)
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
 ## Acknowledgements
 
 A big thank you to Sashenka Fernando for helping me with the hex
@@ -116,8 +138,16 @@ entry-spacing="0">
 
 <div id="ref-SKCS2025graphon" class="csl-entry">
 
-Kandanaarachchi, Sevvandi, and Cheng Soon Ong. 2025. “Graphon Mixtures.”
-*arXiv Preprint arXiv:2505.13864*.
+Kandanaarachchi, Sevvandi, and Cheng Soon Ong. 2026. “Graphon Mixtures.”
+*AISTATS*.
+
+</div>
+
+<div id="ref-wijesinghe2026flowette" class="csl-entry">
+
+Wijesinghe, Asiri, Sevvandi Kandanaarachchi, Daniel M Steinberg, and
+Cheng Soon Ong. 2026. “Flowette: Flow Matching with Graphette Priors for
+Graph Generation.” *arXiv Preprint arXiv:2602.23566*.
 
 </div>
 
