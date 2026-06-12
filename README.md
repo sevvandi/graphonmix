@@ -95,8 +95,8 @@ plot(gr1,
 
 ## Graphette example
 
-This is an example with $\rho_n = 10/n$ and $f = \text{star_f1}$. The
-graph edit function $\text{star_f1}$ adds stars using a Poisson process.
+This is an example with $\rho_n = 10/n$ and \$f = \$ star_f1. The graph
+edit function star_f1 adds stars using a Poisson process.
 
 ``` r
 rho <- function(n) 20/n

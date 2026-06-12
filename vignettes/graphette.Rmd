@@ -46,7 +46,7 @@ plot(gr, vertex.size = 3, vertex.label = NA, main = "Graphon sampling")
 
 ## Using the graphette
 
-To generate dense graphs from the graphette we set $rho_n = 1$ for all $n$ and the graph edit function $f$ to the identity function. In the function call *sample_graphette* we set 
+To generate dense graphs from the graphette we set $\rho_n = 1$ for all $n$ and the graph edit function $f$ to the identity function. In the function call *sample_graphette* we set 
 $\rho_n$ = NULL and graph_edit_function = NULL. That way, we get are actually sampling from the graphon $W$ without sparsifying it.  
 
 
