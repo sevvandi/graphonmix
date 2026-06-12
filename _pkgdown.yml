@@ -8,10 +8,11 @@ navbar:
     articles:
       text: Articles
       menu:
-      - text: Getting Started
-        href: articles/graphonmix.html
       - text: Graphettes
         href: articles/graphette.html
       - text: Sparse Graphs from Line Graphons
         href: articles/linegraphons.html
+      - text: Graphon Mixtures
+        href: articles/graphonmix.html
+
 
