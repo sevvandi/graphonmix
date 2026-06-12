@@ -88,7 +88,9 @@ sample_graphette <- function(W,
 
   star_func_list <- list('star_f1', 'star_f2', 'star_f3', 'star_f4', 'star_f5')
 
-  if(graph_edit_f %in% star_func_list){
+  if(is.null(graph_edit_f)){
+    gr <- gr1
+  }else if(graph_edit_f %in% star_func_list){
     gr <- add_star_edges(gr1, match.fun(graph_edit_f), t_or_p)
   }else if (graph_edit_f == 'add_rings'){
     if(t_or_p > 1 | t_or_p < 0){
@@ -98,6 +100,7 @@ sample_graphette <- function(W,
   }else if (graph_edit_f =='remove_cycles'){
     gr <- remove_cycles(gr1)
   }
+
   gr
 }
 

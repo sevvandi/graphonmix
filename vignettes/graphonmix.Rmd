@@ -41,7 +41,7 @@ plot_graphon(W) +
  ggtitle("Dense graphon W")  
 ```
 
-The graphon $W$ above generates the dense part of the graph.  The graphon $U$, which we show below generates the sparse part of the graph. 
+The graphon $W$ above generates the dense part of the graph.  The graphon $U$, which we show below generates the sparse part of the graph. Note that graphon $U$ can be depicted by a sequence. In the following example, this sequence is *wts*. Essentially sampling from $U$ gives us a collection of star graphs where the number of node sequence in the stars is proportional to *wts*. Thus, the sparse part is a collection of stars.  
 
 ```{r}
 # weights for the sparse part
@@ -59,7 +59,7 @@ plot_graphon(U) +
 
 ## Generating the mixture graph in one step
 
-Graphon $U$ is generated from weights *wts* in the above piece of code.  Given *wts* and $W$ we can generate a mixture graph using the function *sample_mixed_graph*. We need to specify the number of nodes in the dense part *nd* and the number of nodes in the sparse part *ns*. The parameter *p* gives the proportion of the number of edges added in the joining process. The joining process adds $p \times$ *number of edges in dense part* to the graph. These edges connect nodes in the dense part to those in the sparse part randomly. 
+Graphon $U$ is generated from weights *wts* in the above piece of code.  Given *wts* and $W$ we can generate a mixture graph using the function *sample_mixed_graph*. We need to specify the number of nodes in the dense part *nd* and the number of nodes in the sparse part *ns*. This generates a graph sampled from $W$ with *nd* nodes and a collection of stars with nodes proportional to *wts*. These two graphs are then joined. To join them we use the parameter *p*, which gives the proportion of the number of edges added in the joining process. That is, using  $p \times$ *number of edges in dense part*  we join nodes in the dense part with nodes in the sparse part. These edges are added randomly to nodes. 
 
 <!-- Let's sample a mixture graph from a dense graphon $W$ and a disjoint clique graphon $U$, which acts as the sparse graphon. We call the sampled graph from $W$ as the dense part and the sampled graph from $U$ (equivalently from the sequence called a mass partition) the sparse part.  -->
 

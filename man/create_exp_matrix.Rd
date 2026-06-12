@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{create_exp_matrix}
 \alias{create_exp_matrix}
-\title{Creates an nxn exponential matrix}
+\title{Creates an exponential graphon}
 \usage{
 create_exp_matrix(nrow, scalar)
 }

@@ -1,0 +1,133 @@
+---
+title: "Introducing Graphettes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{graphette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(igraph)
+library(graphonmix)
+library(ggplot2)
+```
+
+# Graphettes
+Graphettes are a graph generation methodology proposed in [@wijesinghe2026flowette]. A graphette has 3 components: a graphon $W$, a sequence $\{\rho_n\}_n$ and a graph edit function $f$. We can generate dense or sparse graphs from a graphette. On the sparse graph front, we can generate diverse sparse graphs, such as ring-added graphs that have bounded degree or graphs with large hubs like this social networks. We can generate trees as well. Let's look at some examples.
+
+## Dense graphs from grpahons and graphettes
+Let's start with a stochastic block model graphon. 
+
+```{r}
+mat <- matrix(c(0.9, 0.01, 0.02,
+                0.01, 0.8, 0.03,
+                0.02, 0.03, 0.7), nrow = 3, byrow = TRUE)
+W <- sbm_graphon(mat, 100)
+plot_graphon(W) +  coord_fixed(ratio = 1) 
+```
+
+### Using the graphon
+
+Without using graphettes we can sample from this graphon as follows:
+
+```{r}
+gr <- sample_graphon(W, 100)
+plot(gr, vertex.size = 3, vertex.label = NA, main = "Graphon sampling")
+```
+
+### Using the graphette
+
+To generate dense graphs from the graphette we set $rho_n = 1$ for all $n$ and the graph edit function $f$ to the identity function. In the function call *sample_graphette* we set 
+$\rho_n$ = NULL and graph_edit_function = NULL. That way, we get are actually sampling from the graphon $W$ without sparsifying it.  
+
+
+```{r}
+gr1 <- sample_graphette(W, n= 100)
+plot(gr1, vertex.size = 3, vertex.label = NA, main = "Graphette sampling")
+
+
+```
+
+As you can see, in this instance sampling from the graphon or the graphette gives similar graphs. 
+
+## Sparse graphs using $\rho_n$
+Consider the same SBM graphon. We can sparsify it by considering $W_n = \rho_n W$ where $\rho_n \to 0$. And then we sample a graph $G_n$ with $n$ nodes from $W_n$. As $n \to \infty$ the edge density goes to zero making this graph sequence sparse. Let's see how this works. 
+
+### Using the standard graphon and $\rho_n$ separately
+
+```{r}
+
+rho_n <- function(n) exp( -((n-100)/50 ))
+
+
+W250 <- rho_n(250)*W
+W300 <- rho_n(300)*W
+
+gr1 <- sample_graphon(W, 100)
+gr2 <- sample_graphon(W250, 250)
+gr3 <- sample_graphon(W300, 300)
+
+
+g1 <- plot_graphon(W) +  coord_fixed(ratio = 1) 
+g2 <- plot_graphon(W250) +  coord_fixed(ratio = 1) 
+g3 <- plot_graphon(W300) + coord_fixed(ratio = 1) 
+
+gridExtra::grid.arrange(g1, g2, g3, nrow = 1)
+```
+
+The three graphons are shown above and we see the colours get greyed out as $\rho_n$ goes to zero. Let's plot the graphs sampled from the two graphons. 
+
+```{r}
+par(mfrow = c(1,3))
+plot(gr1, vertex.size = 3, vertex.label = NA, main = "From W")
+plot(gr2, vertex.size = 3, vertex.label = NA, main = "From W250")
+plot(gr3, vertex.size = 3, vertex.label = NA, main = "From W300")
+par(mfrow = c(1,1)) 
+
+```
+
+We see the graphs getting sparser. 
+
+### Using the function *sample_sparse_graphon*
+
+The function *sample_sparse_graphon* has a function parameter that can be used for $\rho_n$. 
+
+
+```{r}
+gr4 <- sample_sparse_graphon(W, rho_n, n = 250)
+gr5 <- sample_sparse_graphon(W, rho_n, n = 300)
+
+par(mfrow = c(1,2))
+plot(gr4, vertex.size = 3, vertex.label = NA, main = "n = 250")
+plot(gr5, vertex.size = 3, vertex.label = NA, main = "n = 300")
+par(mfrow = c(1,1))
+```
+### Using the graphette
+
+We can use the *sample_graphette* to get the same functionality by setting *graph_edit_f = $NULL. 
+
+```{r}
+gr6 <- sample_graphette(W, rho_n, n = 250)
+gr7 <- sample_graphette(W, rho_n, n = 300)
+
+
+par(mfrow = c(1,2))
+plot(gr6, vertex.size = 3, vertex.label = NA, main = "n = 250")
+plot(gr7, vertex.size = 3, vertex.label = NA, main = "n = 300")
+par(mfrow = c(1,1))
+
+```
+
+## Sparse graphs using $\rho_n$ and the graph edit function
+
+
+
+## References
