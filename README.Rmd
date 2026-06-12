@@ -54,42 +54,42 @@ plot(gr1,
 )
 ```
 
-Or you can generate the two graphs separately and join them. 
+<!-- Or you can generate the two graphs separately and join them.  -->
 
-```{r}
-# sample the dense part and plot
-grdense <- sample_graphon(W, 100)
-plot(grdense,
-     edge.curved = 0.3,
-     vertex.size = degree(grdense)*0.1,
-     edge.color = "lightgray",     # Light colored edges
-     vertex.label = NA,
-     vertex.color = "lightblue",
-     main = "Dense Part"
-)
+<!-- ```{r} -->
+<!-- # sample the dense part and plot -->
+<!-- grdense <- sample_graphon(W, 100) -->
+<!-- plot(grdense, -->
+<!--      edge.curved = 0.3, -->
+<!--      vertex.size = degree(grdense)*0.1, -->
+<!--      edge.color = "lightgray",     # Light colored edges -->
+<!--      vertex.label = NA, -->
+<!--      vertex.color = "lightblue", -->
+<!--      main = "Dense Part" -->
+<!-- ) -->
 
-# sample the sparse part and plot
-grsparse <- generate_star_union(wts, 300)
-plot(grsparse,
-     edge.curved = 0.3,
-     vertex.size = degree(grsparse)*0.1,
-     edge.color = "lightgray",     # Light colored edges
-     vertex.label = NA,
-     vertex.color = "lightblue",
-     main = "Sparse Part"
-)
+<!-- # sample the sparse part and plot -->
+<!-- grsparse <- generate_star_union(wts, 300) -->
+<!-- plot(grsparse, -->
+<!--      edge.curved = 0.3, -->
+<!--      vertex.size = degree(grsparse)*0.1, -->
+<!--      edge.color = "lightgray",     # Light colored edges -->
+<!--      vertex.label = NA, -->
+<!--      vertex.color = "lightblue", -->
+<!--      main = "Sparse Part" -->
+<!-- ) -->
 
-# join the two graphs and plot
-gr2 <- graph_join(grdense, grsparse, option = 2)
-plot(gr2,
-     edge.curved = 0.3,
-     vertex.size = degree(gr2)*0.1,
-     edge.color = "lightgray",     # Light colored edges
-     vertex.label = NA,
-     vertex.color = "lightblue",
-     main = "(U,W) Graph mixture"
-)
-```
+<!-- # join the two graphs and plot -->
+<!-- gr2 <- graph_join(grdense, grsparse, option = 2) -->
+<!-- plot(gr2, -->
+<!--      edge.curved = 0.3, -->
+<!--      vertex.size = degree(gr2)*0.1, -->
+<!--      edge.color = "lightgray",     # Light colored edges -->
+<!--      vertex.label = NA, -->
+<!--      vertex.color = "lightblue", -->
+<!--      main = "(U,W) Graph mixture" -->
+<!-- ) -->
+<!-- ``` -->
 
 ## Graphette example
 

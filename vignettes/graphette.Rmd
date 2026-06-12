@@ -2,9 +2,10 @@
 title: "Introducing Graphettes"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{graphette}
+  %\VignetteIndexEntry{Introducing Graphettes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: bibliography.bib  
 ---
 
 ```{r, include = FALSE}
@@ -20,10 +21,10 @@ library(graphonmix)
 library(ggplot2)
 ```
 
-# Graphettes
+
 Graphettes are a graph generation methodology proposed in [@wijesinghe2026flowette]. A graphette has 3 components: a graphon $W$, a sequence $\{\rho_n\}_n$ and a graph edit function $f$. We can generate dense or sparse graphs from a graphette. On the sparse graph front, we can generate diverse sparse graphs, such as ring-added graphs that have bounded degree or graphs with large hubs like this social networks. We can generate trees as well. Let's look at some examples.
 
-## Dense graphs from grpahons and graphettes
+# Dense graphs from graphons and graphettes
 Let's start with a stochastic block model graphon. 
 
 ```{r}
@@ -34,7 +35,7 @@ W <- sbm_graphon(mat, 100)
 plot_graphon(W) +  coord_fixed(ratio = 1) 
 ```
 
-### Using the graphon
+## Using the graphon
 
 Without using graphettes we can sample from this graphon as follows:
 
@@ -43,7 +44,7 @@ gr <- sample_graphon(W, 100)
 plot(gr, vertex.size = 3, vertex.label = NA, main = "Graphon sampling")
 ```
 
-### Using the graphette
+## Using the graphette
 
 To generate dense graphs from the graphette we set $rho_n = 1$ for all $n$ and the graph edit function $f$ to the identity function. In the function call *sample_graphette* we set 
 $\rho_n$ = NULL and graph_edit_function = NULL. That way, we get are actually sampling from the graphon $W$ without sparsifying it.  
@@ -58,10 +59,10 @@ plot(gr1, vertex.size = 3, vertex.label = NA, main = "Graphette sampling")
 
 As you can see, in this instance sampling from the graphon or the graphette gives similar graphs. 
 
-## Sparse graphs using $\rho_n$
+# Sparse graphs using $\rho_n$
 Consider the same SBM graphon. We can sparsify it by considering $W_n = \rho_n W$ where $\rho_n \to 0$. And then we sample a graph $G_n$ with $n$ nodes from $W_n$. As $n \to \infty$ the edge density goes to zero making this graph sequence sparse. Let's see how this works. 
 
-### Using the standard graphon and $\rho_n$ separately
+## Using the standard graphon and $\rho_n$ separately
 
 ```{r}
 
@@ -96,7 +97,7 @@ par(mfrow = c(1,1))
 
 We see the graphs getting sparser. 
 
-### Using the function *sample_sparse_graphon*
+## Using the function *sample_sparse_graphon*
 
 The function *sample_sparse_graphon* has a function parameter that can be used for $\rho_n$. 
 
@@ -110,7 +111,7 @@ plot(gr4, vertex.size = 3, vertex.label = NA, main = "n = 250")
 plot(gr5, vertex.size = 3, vertex.label = NA, main = "n = 300")
 par(mfrow = c(1,1))
 ```
-### Using the graphette
+## Using the graphette
 
 We can use the *sample_graphette* to get the same functionality by setting *graph_edit_f = $NULL. 
 
@@ -126,8 +127,53 @@ par(mfrow = c(1,1))
 
 ```
 
-## Sparse graphs using $\rho_n$ and the graph edit function
+# Sparse graphs using $\rho_n$ and the graph edit function
+We have the functionality to add stars, add rings and remove cycles using the graph edit function. 
 
+## Adding stars
+The functions *star_f1*, *star_f2*, *star_f3*, *star_f4* and *star_f5* can be used to add stars. While there are slight differences, all of these functions use a Poisson process to add additional connections to each node. The parameter $t_or_p$ controls the intensity of the Poisson process. 
 
+```{r}
+gr8 <- sample_graphette(W, rho_n, "star_f1", n = 250, t_or_p = 2)
+gr9 <- sample_graphette(W, rho_n, "star_f1", n = 300, t_or_p = 2)
+
+par(mfrow = c(1,2))
+plot(gr8, vertex.size = 3, vertex.label = NA, main = "n = 250")
+plot(gr9, vertex.size = 3, vertex.label = NA, main = "n = 300")
+par(mfrow = c(1,1))
+```
+In the above example $\rho_n$ goes to 0 very fast. Let us use something a bit different
+
+```{r}
+rho2 <- function(n)10/n
+gr10 <- sample_graphette(W, rho2, "star_f1", n = 250, t_or_p = 2)
+gr11 <- sample_graphette(W, rho2, "star_f1", n = 300, t_or_p = 2)
+
+par(mfrow = c(1,2))
+plot(gr10, vertex.size = 3, vertex.label = NA, main = "n = 250")
+plot(gr11, vertex.size = 3, vertex.label = NA, main = "n = 300")
+par(mfrow = c(1,1))
+```
+## Adding rings
+
+To add rings to the graph, use *add_rings* as the graph edit function. The parameter *t_or_p* gives the proportion of nodes to which rings are added. The default ring size is 5 or 6, but this can be changed. 
+
+```{r}
+gr <- sample_graphette(W, rho_n, "add_rings", n = 100, t_or_p = 0.5, ring_sizes = c(10:15))
+
+plot(gr, vertex.size = 3, vertex.label = NA)
+
+```
+
+## Removing cycles
+
+To remove cycles from a graph, use *remove_cycles* as the graph edit function. 
+
+```{r}
+gr <- sample_graphette(W, rho_n, "remove_cycles", n = 200)
+
+plot(gr, vertex.size = 3, vertex.label = NA)
+
+```
 
 ## References

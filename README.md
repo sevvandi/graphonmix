@@ -59,54 +59,39 @@ plot(gr1,
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
-Or you can generate the two graphs separately and join them.
-
-``` r
-# sample the dense part and plot
-grdense <- sample_graphon(W, 100)
-plot(grdense,
-     edge.curved = 0.3,
-     vertex.size = degree(grdense)*0.1,
-     edge.color = "lightgray",     # Light colored edges
-     vertex.label = NA,
-     vertex.color = "lightblue",
-     main = "Dense Part"
-)
-```
-
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
-
-``` r
-
-# sample the sparse part and plot
-grsparse <- generate_star_union(wts, 300)
-plot(grsparse,
-     edge.curved = 0.3,
-     vertex.size = degree(grsparse)*0.1,
-     edge.color = "lightgray",     # Light colored edges
-     vertex.label = NA,
-     vertex.color = "lightblue",
-     main = "Sparse Part"
-)
-```
-
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
-
-``` r
-
-# join the two graphs and plot
-gr2 <- graph_join(grdense, grsparse, option = 2)
-plot(gr2,
-     edge.curved = 0.3,
-     vertex.size = degree(gr2)*0.1,
-     edge.color = "lightgray",     # Light colored edges
-     vertex.label = NA,
-     vertex.color = "lightblue",
-     main = "(U,W) Graph mixture"
-)
-```
-
-<img src="man/figures/README-unnamed-chunk-2-3.png" width="100%" />
+<!-- Or you can generate the two graphs separately and join them.  -->
+<!-- ```{r} -->
+<!-- # sample the dense part and plot -->
+<!-- grdense <- sample_graphon(W, 100) -->
+<!-- plot(grdense, -->
+<!--      edge.curved = 0.3, -->
+<!--      vertex.size = degree(grdense)*0.1, -->
+<!--      edge.color = "lightgray",     # Light colored edges -->
+<!--      vertex.label = NA, -->
+<!--      vertex.color = "lightblue", -->
+<!--      main = "Dense Part" -->
+<!-- ) -->
+<!-- # sample the sparse part and plot -->
+<!-- grsparse <- generate_star_union(wts, 300) -->
+<!-- plot(grsparse, -->
+<!--      edge.curved = 0.3, -->
+<!--      vertex.size = degree(grsparse)*0.1, -->
+<!--      edge.color = "lightgray",     # Light colored edges -->
+<!--      vertex.label = NA, -->
+<!--      vertex.color = "lightblue", -->
+<!--      main = "Sparse Part" -->
+<!-- ) -->
+<!-- # join the two graphs and plot -->
+<!-- gr2 <- graph_join(grdense, grsparse, option = 2) -->
+<!-- plot(gr2, -->
+<!--      edge.curved = 0.3, -->
+<!--      vertex.size = degree(gr2)*0.1, -->
+<!--      edge.color = "lightgray",     # Light colored edges -->
+<!--      vertex.label = NA, -->
+<!--      vertex.color = "lightblue", -->
+<!--      main = "(U,W) Graph mixture" -->
+<!-- ) -->
+<!-- ``` -->
 
 ## Graphette example
 
@@ -124,7 +109,7 @@ gr <- sample_graphette(W,
 plot(gr, vertex.label = NA, vertex.size = 3)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ## Acknowledgements
 
